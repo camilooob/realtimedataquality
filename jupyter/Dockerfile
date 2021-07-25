@@ -3,7 +3,9 @@
 FROM python:3.7-slim
 RUN mkdir src
 ENV APP_HOME /src
+COPY . ./src
 WORKDIR $APP_HOME
+RUN pip install -r requirements.txt
 RUN pip install jupyter
 CMD jupyter notebook --no-browser --ip=0.0.0.0 --port=8888 --allow-root
 
@@ -12,10 +14,10 @@ CMD jupyter notebook --no-browser --ip=0.0.0.0 --port=8888 --allow-root
 # Copy local code to the container image.
 # ENV APP_HOME /app
 # WORKDIR $APP_HOME
-# COPY . ./
+
 
 # Install production dependencies.
-# RUN pip install -r requirements.txt
+# 
 # RUN export DOCKER_CLIENT_TIMEOUT=1200
 # RUN export COMPOSE_HTTP_TIMEOUT=1200
 # Run the web service on container startup. Here we use the gunicorn
